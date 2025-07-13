@@ -1,11 +1,6 @@
-Absolutely! Here's your complete, clean, and copy-ready **`README.md`** content for the **USTAAD – AI Interview Coach (Backend)**:
-
----
-
-```markdown
 # USTAAD – AI Interview Coach (Backend)
 
-This is the backend system for **USTAAD**, an AI-powered platform that simulates mock interviews, processes user audio/video, and provides personalized feedback using LLMs, Whisper, and computer vision.
+ **USTAAD**, an AI-powered platform that simulates mock interviews, processes user audio/video, and provides personalized feedback.
 
 ---
 
@@ -22,8 +17,7 @@ This is the backend system for **USTAAD**, an AI-powered platform that simulates
 
 ## 📂 Folder Structure
 
-```
-
+```plaintext
 ustaad-ai-interview-coach/
 ├── backend/
 │   ├── app/
@@ -38,7 +32,6 @@ ustaad-ai-interview-coach/
 ├── docker-compose.yml
 └── README.md
 
-````
 
 ---
 
