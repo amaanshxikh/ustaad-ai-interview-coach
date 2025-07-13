@@ -1,4 +1,4 @@
-# USTAAD – AI Interview Coach (Backend)
+# USTAAD – AI Interview Coach
 
  **USTAAD**, an AI-powered platform that simulates mock interviews, processes user audio/video, and provides personalized feedback.
 
