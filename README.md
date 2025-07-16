@@ -1,37 +1,44 @@
-# USTAAD – AI Interview Coach
+# 🤖 USTAAD – AI Interview Coach
 
- **USTAAD**, an AI-powered platform that simulates mock interviews, processes user audio/video, and provides personalized feedback.
+**USTAAD** is an AI-powered interview preparation platform. It simulates mock interviews using user-submitted audio, performs speech-to-text transcription, and will soon provide smart feedback via GPT and video-based posture/emotion analysis.
 
 ---
 
-## 📦 Tech Stack
+## 🧠 Tech Stack
 
 - **Python 3.10+**
 - **FastAPI**
 - **Uvicorn**
-- **Whisper (Phase 2)**
-- **MongoDB (coming in Phase 2)**
-- **Docker (optional deployment)**
+- **OpenAI Whisper**
+- **SQLite** (Temporary DB for storing transcripts)
+- **MongoDB** *(planned in Phase 2)*
+- **Docker** *(optional deployment)*
 
 ---
 
-## 📂 Folder Structure
+## 📁 Folder Structure
 
-```plaintext
+```
 ustaad-ai-interview-coach/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py
 │   │   ├── routes/
+│   │   │   └── interview.py
 │   │   ├── services/
-│   │   └── models/
+│   │   │   └── whisper_service.py
+│   │   ├── database/
+│   │   │   ├── models.py
+│   │   │   └── session.py
+│   │   └── logging_config.py
 │   ├── venv/
 │   └── requirements.txt
-├── media/
-├── frontend/         # Will be set up later
-├── docker-compose.yml
+├── media/                 # Uploaded audio files
+├── logs/                  # Log files
+├── frontend/              # Placeholder for future frontend
+├── docker-compose.yml     # (Planned)
 └── README.md
-
+```
 
 ---
 
@@ -40,41 +47,51 @@ ustaad-ai-interview-coach/
 ```bash
 cd backend
 python -m venv venv
-.\venv\Scripts\activate  # (or source venv/bin/activate on Linux/Mac)
+.\venv\Scripts\activate         # On Windows
+# Or: source venv/bin/activate  # On Mac/Linux
+
 pip install -r requirements.txt
 uvicorn app.main:app --reload
-````
+```
 
-Then visit [http://127.0.0.1:8000/docs] to access Swagger UI.
+Open your browser and visit [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to use the Swagger UI.
 
 ---
 
 ## 📡 API Endpoints
 
-| Method | Endpoint           | Description                     |
-| ------ | ------------------ | ------------------------------- |
-| GET    | `/`                | Health check                    |
-| GET    | `/interview/test`  | Test custom route               |
-| POST   | `/interview/audio` | Upload audio & return dummy STT |
+| Method | Endpoint                 | Description                          |
+|--------|--------------------------|--------------------------------------|
+| GET    | `/`                      | Health check                         |
+| POST   | `/interview/audio`       | Upload MP3 audio and get transcript  |
+| GET    | `/interview/transcripts` | View all saved transcripts (from DB) |
 
 ---
 
 ## 🔮 Upcoming Features (Phase 2)
 
-* [ ] Whisper AI transcription
-* [ ] Emotion/tone detection
-* [ ] Video posture and expression analysis
-* [ ] GPT-4o feedback generation
-* [ ] Interview history dashboard (MongoDB)
+- [x] Whisper-based transcription
+- [ ] Emotion and tone analysis
+- [ ] Posture & facial expression detection (video)
+- [ ] Smart feedback via GPT-4o
+- [ ] MongoDB-based interview dashboard
+- [ ] Frontend integration (React)
 
 ---
 
-## 🛡️ .gitignore Template
+## 📦 Sample Transcription Flow
 
-Make sure your `.gitignore` file contains:
+1. Send `.mp3` audio to `/interview/audio`
+2. It will be converted to `.wav` and passed through OpenAI Whisper
+3. The transcript is returned and saved to a database
+4. Retrieve all transcripts via `/interview/transcripts`
+
+---
+
+## 🛡️ .gitignore Suggestions
 
 <details>
-<summary>Click to view</summary>
+<summary>Click to expand</summary>
 
 ```gitignore
 # Python
@@ -83,9 +100,13 @@ __pycache__/
 *.pyo
 *.pyd
 venv/
-*.env
+.env
 
-# Frontend
+# FastAPI & Logs
+logs/
+media/
+
+# Node/React (frontend)
 node_modules/
 build/
 
@@ -93,13 +114,15 @@ build/
 .vscode/
 .DS_Store
 Thumbs.db
-
-# Misc
-media/
 ```
 
 </details>
-```
 
 ---
 
+## 👥 Contributors
+
+Made with ❤️ by Amaan Shaikh & Team  
+KJSCE Final Year Project – 2025-26
+
+---
